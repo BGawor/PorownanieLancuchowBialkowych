@@ -31,12 +31,19 @@ namespace PorownanieLancuchowBialkowych
         }
         static void Main(string[] args)
         {
+            StreamReader fs = null;
             try
             {
-                StreamReader fs = new StreamReader(Path.GetFullPath("C:\\Users\\Bartlomiej\\Documents\\lancuchy_bialkowe.txt"));
+                if (args.Length == 0)
+                {
+                    fs = new StreamReader(Path.GetFullPath("C:\\Users\\Bartlomiej\\Documents\\lancuchy_bialkowe.txt"));
+                }
+                else
+                {
+                    fs = new StreamReader(Path.GetFileName(args[0]));
+                }
 
-
-                while (!fs.EndOfStream)
+                while (!fs.EndOfStream)  // question: (how) can I take this loop outside try block
                 {
                     if (ChangePossible(fs.ReadLine(), fs.ReadLine()))
                     {
